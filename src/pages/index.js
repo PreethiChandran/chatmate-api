@@ -21,7 +21,11 @@ export default function Home() {
   }
 
   const sendMessage = (message) => {
-    const url = '/api/chat';
+    const url = 'https://api.openai.com/v1/chat/completions';
+      const headers ={
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${process.env.NEXT_PUBLIC_OPENAI_API_KEY}`
+      }
     const data = {
       model: "gpt-3.5-turbo",
       messages: [{ "role": "user", "content": message }]
@@ -29,7 +33,7 @@ export default function Home() {
 
     setIsLoading(true);
 
-    axios.post(url, data).then((response) => {
+    axios.post(url, data, {headers: headers}).then((response) => {
       console.log(response);
       setChatLog((prevChatLog) => [...prevChatLog, { type: 'bot', message: response.data.choices[0].message.content }])
       setIsLoading(false);
