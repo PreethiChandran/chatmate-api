@@ -10,6 +10,7 @@ export default function Home() {
   const [chatLog, setChatLog] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const openAiApiKey = process.env.OPENAI_API_KEY;
+  console.log('OPEN API KEY' + process.env.OPENAI_API_KEY);
 
   const handleSubmit = (event) => {
     event.preventDefault();
